@@ -3,10 +3,11 @@ package com.iset.produits.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.iset.produits.dao.ProduitRepository;
 import com.iset.produits.entities.Produit;
-
+@Service
 public class ProduitServiceImpl implements ProduitService {
 
   @Autowired

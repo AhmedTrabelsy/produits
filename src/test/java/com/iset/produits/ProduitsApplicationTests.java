@@ -7,45 +7,44 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.iset.produits.dao.ProduitRepository;
 import com.iset.produits.entities.Produit;
+import com.iset.produits.service.ProduitServiceImpl;
 
 @SpringBootTest
 class ProduitsApplicationTests {
 
   @Autowired
-  ProduitRepository produitRepository;
+  ProduitServiceImpl produitService;
 
   @Test
   public void testCreateProduit() {
     Produit prod = new Produit("PC Asus", 1500.500, new Date());
-    produitRepository.save(prod);
+    produitService.saveProduit(prod);
   }
 
   @Test
   public void testFindProduit() {
-    Produit p = produitRepository.findById(1L).get();
-    System.out.println(p);
+    Produit prod = produitService.getProduit(1L);
+    System.out.println(prod);
   }
 
   @Test
   public void testUpdateProduit() {
-    Produit p = produitRepository.findById(1L).get();
-    p.setPrixProduit(2000.0);
-    produitRepository.save(p);
-    System.out.println(p);
+    Produit prod = produitService.getProduit(1L);
+    prod.setPrixProduit(2000.0);
+    produitService.updateProduit(prod);
   }
 
   @Test
   public void testDeleteProduit() {
-    produitRepository.deleteById(1L);
+    produitService.deleteProduitById(1L);
   }
 
   @Test
   public void testFindAllProduits() {
-    List<Produit> prods = produitRepository.findAll();
-    for (Produit p : prods)
-      System.out.println(p);
+    List<Produit> prods = produitService.getAllProduits();
+    for (Produit prod : prods)
+      System.out.println(prod);
   }
 
 }
