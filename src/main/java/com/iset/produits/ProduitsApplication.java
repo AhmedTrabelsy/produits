@@ -1,4 +1,4 @@
-package com.iset.produits.produits;
+package com.iset.produits;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
