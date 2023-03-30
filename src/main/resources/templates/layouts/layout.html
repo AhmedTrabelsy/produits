@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.2.3/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css" />
+
+<head>
+  <meta charset="utf-8">
+  <title>Gestion des Produits</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" aria-label="Eighth navbar example">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{ListeProduits}">Gestion de Produits</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample07">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown"
+              aria-expanded="false">Produits</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown07">
+              <li><a class="dropdown-item" th:href="@{showCreate}">Ajouter</a></li>
+              <li><a class="dropdown-item" th:href="@{ListeProduits}">Lister</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section layout:fragment="content"></section>
+  <script type="text/javascript" src="webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

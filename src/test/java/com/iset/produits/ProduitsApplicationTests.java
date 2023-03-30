@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 
 import com.iset.produits.entities.Produit;
 import com.iset.produits.service.ProduitServiceImpl;
@@ -47,4 +48,14 @@ class ProduitsApplicationTests {
       System.out.println(prod);
   }
 
+  @Test
+  public void testFindByNomProduitContains() {
+    Page<Produit> prods = produitService.getAllProduitsParPage(0, 2);
+    System.out.println(prods.getSize());
+    System.out.println(prods.getTotalElements());
+    System.out.println(prods.getTotalPages());
+    prods.getContent().forEach(p -> {
+      System.out.println(p.toString());
+    });
+  }
 }

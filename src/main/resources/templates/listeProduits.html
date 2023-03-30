@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout}">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+  <title>Liste Produits</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="container p-4">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-center">Liste des Produits</h1>
+        </div>
+        <div class="card-body">
+          <div th:text="${msg}" th:if="${msg}" class="alert alert-success" role="alert"></div>
+          <table class="table table-striped">
+            <tr>
+              <th>ID</th>
+              <th>Nom Produit</th>
+              <th>Prix</th>
+              <th>Date Création</th>
+              <th>Actions</th>
+            </tr>
+            <tr th:each="produit: ${produits.content}">
+              <td th:text="${produit.idProduit}"></td>
+              <td th:text="${produit.nomProduit}"></td>
+              <td th:text="${produit.prixProduit}"></td>
+              <td th:text="${produit.dateCreation}"></td>
+              <td>
+                <a th:href="@{modifierProduit(id=${produit.idProduit})}" class="btn btn-success btn-sm" type="button"
+                  title="Edit">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a onclick="return confirm('Etes-vous sûr ?')"
+                  th:href="@{supprimerProduit(id=${produit.idProduit}, page=${currentPage},size=${size})}"
+                  class="btn btn-danger btn-sm" type="button" title="Delete">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </table>
+          <ul class="nav nav-pills">
+            <li th:each="page,status:${pages}">
+              <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+                th:href="@{ ListeProduits(page=${status.index}, size=${size} ) }" th:text="${status.index }"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

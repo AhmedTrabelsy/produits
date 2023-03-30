@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout}">
+<head>
+  <meta charset="windows-1256" />
+  <title>Modifier Produit</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="container border mt-3 px-4 py-3">
+      <h2 class="text-center m-4">Modifier Produit N° <span th:text="${produit.idProduit}"></span></h2>
+      <div th:text="${msg}" th:if="${msg}" class="alert alert-success my-3" role="alert"></div>
+      <form action="updateProduit" method="post">
+        <div class="mb-3">
+          <!-- <label for="id_input" class="form-label">Id</label> -->
+          <input name="idProduit" type="text" class="form-control" id="id_input" th:value="${produit.idProduit}" hidden>
+        </div>
+        <div class="mb-3">
+          <label for="name_input" class="form-label">Nom</label>
+          <input name="nomProduit" type="text" class="form-control" id="name_input" th:value="${produit.nomProduit}">
+        </div>
+        <div class="mb-3">
+          <label for="price_input" class="form-label">Prix</label>
+          <input name="prixProduit" type="number" class="form-control" id="price_input"
+            th:value="${produit.prixProduit}">
+        </div>
+        <div class="mb-3">
+          <label for="date_input" class="form-label">Date</label>
+          <input name="date" type="date" class="form-control" id="date_input" th:value="${produit.dateCreation}">
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Modifier</button>
+          <a href="ListeProduits" class="btn btn-success">Liste Produits</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

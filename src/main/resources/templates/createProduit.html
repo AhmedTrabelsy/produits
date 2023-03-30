@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout}">
+
+<head>
+  <meta charset="windows-1256" />
+  <title>Créer un Produit</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="container p-4">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-center">Ajouter Produit</h1>
+        </div>
+        <div class="card-body">
+          <div th:text="${msg}" th:if="${msg}" class="alert alert-success" role="alert"></div>
+          <form action="saveProduit" method="post">
+            <div class="mb-3">
+              <label for="name_input" class="form-label">Nom</label>
+              <input name="nomProduit" type="text" class="form-control" id="name_input" required>
+            </div>
+            <div class="mb-3">
+              <label for="price_input" class="form-label">Prix</label>
+              <input name="prixProduit" type="number" class="form-control" id="price_input" required>
+            </div>
+            <div class="mb-3">
+              <label for="date_input" class="form-label">Date</label>
+              <input name="date" type="date" class="form-control" id="date_input" required>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+              <a href="ListeProduits" class="btn btn-success">Liste Produits</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
