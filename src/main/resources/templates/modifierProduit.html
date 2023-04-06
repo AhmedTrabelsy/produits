@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{layouts/layout}">
+
 <head>
   <meta charset="windows-1256" />
   <title>Modifier Produit</title>
@@ -30,8 +31,8 @@
           <input name="date" type="date" class="form-control" id="date_input" th:value="${produit.dateCreation}">
         </div>
         <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-primary">Modifier</button>
-          <a href="ListeProduits" class="btn btn-success">Liste Produits</a>
+          <button type="submit" class="btn btn-primary">Modifier <i class="bi bi-check-circle"></i></button>
+          <a href="ListeProduits" class="btn btn-success"><i class="bi bi-list-ul"></i> Liste Produits</a>
         </div>
       </form>
     </div>
