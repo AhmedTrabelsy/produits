@@ -3,6 +3,7 @@ package com.iset.produits.controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,6 +51,36 @@ public class CatController {
     modelMap.addAttribute("currentPage", page);
     return "listeProduits";
   }
+
+  @GetMapping("/ListeProduitsByName")
+  public String listeProduitsByName(ModelMap modelMap, @RequestParam("nom") String name) {
+    List<Produit> produits = produitService.findByNomProduitContains(name);
+    List<Produit> all_produits = produitService.getAllProduits();
+
+    if (produits.isEmpty()) {
+      modelMap.addAttribute("msg", "Pas de produits avec se clé !");
+      modelMap.addAttribute("produits", all_produits);
+    } else {
+      modelMap.addAttribute("produits", produits);
+      modelMap.addAttribute("searchTerm", name);
+    }
+
+    return "listeProduits";
+  }
+
+  // @GetMapping("/ListeProduitsByName")
+  // public String listeProduitsByName(ModelMap modelMap, @RequestParam(name =
+  // "nom", defaultValue = "") String nom) {
+  // List<Produit> produits;
+  // produits = produitService.getAllProduits();
+  // // if (nom.isEmpty()) {
+  // // } else {
+  // // produits = produitService.findByNomProduitContains(nom);
+  // // }
+  // modelMap.addAttribute("produits", produits);
+  // modelMap.addAttribute("searchTerm", nom); // add the search term to the model
+  // return "listeProduits";
+  // }
 
   @RequestMapping("/supprimerProduit")
   public String supprimerProduit(@RequestParam("id") Long produit_id, ModelMap modelMap,

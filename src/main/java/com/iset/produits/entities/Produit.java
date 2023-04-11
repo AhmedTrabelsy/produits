@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Produit {
@@ -15,6 +16,8 @@ public class Produit {
   private String nomProduit;
   private Double prixProduit;
   private Date dateCreation;
+  @ManyToOne
+  private Categorie categorie;
 
   public Produit() {
   }

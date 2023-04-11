@@ -23,7 +23,7 @@
         </div>
         <div class="mb-3">
           <label for="price_input" class="form-label">Prix</label>
-          <input name="prixProduit" type="number" class="form-control" id="price_input"
+          <input name="prixProduit" type="number" class="form-control" id="price_input" min="0" step="any"
             th:value="${produit.prixProduit}">
         </div>
         <div class="mb-3">

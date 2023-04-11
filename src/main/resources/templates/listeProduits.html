@@ -16,6 +16,19 @@
         </div>
         <div class="card-body">
           <div th:text="${msg}" th:if="${msg}" class="alert alert-success" role="alert"></div>
+          <div th:if="${searchTerm}" class="alert alert-success" role="alert">
+            <div>
+              Résultats du recherche pour "<span th:text="${searchTerm}"></span>"
+            </div>
+          </div>
+          <form class="bd-search m-3" action="ListeProduitsByName" method="get">
+            <div class="d-flex justify-content-start w-25">
+              <input type="search" name="nom" class="form-control ds-input" placeholder="Search..." autocomplete="off">
+              <button type="submit" class="btn btn-primary ms-2">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
           <table class="table table-striped">
             <tr>
               <th>ID</th>
@@ -24,7 +37,7 @@
               <th>Date Création</th>
               <th>Actions</th>
             </tr>
-            <tr th:each="produit: ${produits.content}">
+            <tr th:each="produit: ${produits}">
               <td th:text="${produit.idProduit}"></td>
               <td th:text="${produit.nomProduit}"></td>
               <td th:text="${produit.prixProduit}"></td>
@@ -42,12 +55,12 @@
               </td>
             </tr>
           </table>
-          <ul class="nav nav-pills">
+          <!-- <ul class="nav nav-pills" th:if="${pages}">
             <li th:each="page,status:${pages}">
               <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
                 th:href="@{ ListeProduits(page=${status.index}, size=${size} ) }" th:text="${status.index }"></a>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>
