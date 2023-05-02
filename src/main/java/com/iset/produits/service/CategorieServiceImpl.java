@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.iset.produits.dao.CategorieRepository;
 import com.iset.produits.entities.Categorie;
-import com.iset.produits.entities.Produit;
 
 @Service
 public class CategorieServiceImpl implements CategorieService {
@@ -33,7 +32,7 @@ public class CategorieServiceImpl implements CategorieService {
 
   // @Override
   // public void deleteCategorie(Categorie p) {
-  //   categorieRepository.delete(p);
+  // categorieRepository.delete(p);
   // }
 
   @Override
@@ -53,7 +52,7 @@ public class CategorieServiceImpl implements CategorieService {
 
   // @Override
   // public List<Categorie> findByNomCategorie(String nom) {
-  //   return categorieRepository.findByNomCategorie(nom);
+  // return categorieRepository.findByNomCategorie(nom);
   // }
 
   @Override
@@ -63,21 +62,24 @@ public class CategorieServiceImpl implements CategorieService {
 
   // @Override
   // public Categorie findByProduit(Produit produit) {
-  //   return categorieRepository.findByProduit(produit);
+  // return categorieRepository.findByProduit(produit);
   // }
 
   // @Override
   // public List<Categorie> findByCategorieidProduit(Long id) {
-  //   throw new UnsupportedOperationException("Unimplemented method 'findByCategorieidProduit'");
+  // throw new UnsupportedOperationException("Unimplemented method
+  // 'findByCategorieidProduit'");
   // }
 
   // @Override
   // public List<Categorie> findByOrderByNomCategorieAsc() {
-  //   throw new UnsupportedOperationException("Unimplemented method 'findByOrderByNomCategorieAsc'");
+  // throw new UnsupportedOperationException("Unimplemented method
+  // 'findByOrderByNomCategorieAsc'");
   // }
 
   // @Override
   // public List<Categorie> trierCategoriesNoms() {
-  //   throw new UnsupportedOperationException("Unimplemented method 'trierCategoriesNoms'");
+  // throw new UnsupportedOperationException("Unimplemented method
+  // 'trierCategoriesNoms'");
   // }
 }

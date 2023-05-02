@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.iset.produits.entities.Categorie;
-import com.iset.produits.entities.Produit;
 
 public interface CategorieService {
   List<Categorie> getAllCategories();

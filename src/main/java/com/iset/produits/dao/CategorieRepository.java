@@ -3,10 +3,8 @@ package com.iset.produits.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import com.iset.produits.entities.Categorie;
-import com.iset.produits.entities.Produit;
 
 public interface CategorieRepository extends JpaRepository<Categorie, Long> {
   // List<Categorie> findByNomCategorie(String nom);
