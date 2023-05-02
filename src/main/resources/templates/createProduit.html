@@ -19,13 +19,13 @@
           <form action="saveProduit" method="post">
             <div class="mb-3">
               <label for="name_input" class="form-label">Nom</label>
-              <input name="nomProduit" type="text" class="form-control" id="name_input" th:value="${produit.nomProduit}"
+              <input name="nomProduit" type="text" class="form-control" id="name_input" placeholder="Nom Produit" th:value="${produit.nomProduit}"
                 required>
               <span th:errors="${produit.nomProduit}" class="text-danger"></span>
             </div>
             <div class="mb-3">
               <label for="price_input" class="form-label">Prix</label>
-              <input name="prixProduit" type="number" class="form-control" id="price_input" min="0" step="any"
+              <input name="prixProduit" type="number" class="form-control" id="price_input" placeholder="Prix Produit" min="0" step="any"
                 th:value="${produit.prixProduit}" required>
               <span th:errors="${produit.prixProduit}" class="text-danger"></span>
             </div>
