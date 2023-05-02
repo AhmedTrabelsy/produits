@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout}">
+
+<head>
+  <meta charset="windows-1256" />
+  <title>Créer un Categorie</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="container p-4">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-center">Ajouter Categorie</h1>
+        </div>
+        <div class="card-body">
+          <div th:text="${msg}" th:if="${msg}" class="alert alert-success" role="alert"></div>
+          <form action="saveCategorie" method="post">
+            <div class="mb-3">
+              <label for="name_input" class="form-label">Nom</label>
+              <input name="nomCat" type="text" class="form-control" id="name_input" th:value="${categorie.nomCat}"
+                required>
+              <span th:errors="${categorie.nomCat}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+              <label for="description_input" class="form-label">Description</label>
+              <textarea th:value="${categorie.descriptionCat}" name="descriptionCat" id="description_input"
+                class="form-control" cols="20" rows="5" placeholder="Description" required></textarea>
+              <span th:errors="${categorie.descriptionCat}" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ajouter</button>
+              <a href="ListeCategories" class="btn btn-success"><i class="bi bi-list-ul"></i> Liste Categories</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout}">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+  <title>Liste Caagories</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="container p-4">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-center">Liste des Catgories</h1>
+        </div>
+        <div class="card-body">
+          <div th:text="${msg}" th:if="${msg}" class="alert alert-success" role="alert"></div>
+          <div th:if="${searchTerm}" class="alert alert-success" role="alert">
+            <div>
+              Résultats du recherche pour "<span th:text="${searchTerm}"></span>"
+            </div>
+          </div>
+          <form class="bd-search m-3" action="ListeCategoriesByName" method="get">
+            <div class="d-flex justify-content-start w-25">
+              <input type="search" name="nom" class="form-control ds-input" required placeholder="Search..." autocomplete="off">
+              <button type="submit" class="btn btn-primary ms-2">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+          <table class="table table-striped">
+            <tr>
+              <th>ID</th>
+              <th>Nom Categorie</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+            <tr th:each="categorie: ${categories}">
+              <td th:text="${categorie.idCat}"></td>
+              <td th:text="${categorie.nomCat}"></td>
+              <td th:text="${categorie.descriptionCat}"></td>
+              <td>
+                <a th:href="@{modifierCategorie(id=${categorie.idCat})}" class="btn btn-success btn-sm" type="button"
+                  title="Edit">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a onclick="return confirm('Etes-vous sûr ?')"
+                  th:href="@{supprimerCategorie(id=${categorie.idCat}, page=${currentPage},size=${size})}"
+                  class="btn btn-danger btn-sm" type="button" title="Delete">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </table>
+          <ul class="nav nav-pills" th:if="${pages}">
+            <li th:each="page,status:${pages}">
+              <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+                th:href="@{ ListeCategories(page=${status.index}, size=${size} ) }" th:text="${status.index }"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
