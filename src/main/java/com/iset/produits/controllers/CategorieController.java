@@ -88,13 +88,13 @@ public class CategorieController {
     return "listeCategories";
   }
 
-  // @RequestMapping("/modifierCategorie")
-  // public String modifierCategories(@RequestParam("id") Long categorie_id,
-  // ModelMap modelMap) {
-  // Categorie categorie = categorieService.getCategorie(categorie_id);
-  // modelMap.addAttribute("categorie", categorie);
-  // return "modifierCategorie";
-  // }
+  @RequestMapping("/modifierCategorie")
+  public String modifierCategories(@RequestParam("id") Long categorie_id,
+  ModelMap modelMap) {
+  Categorie categorie = categorieService.getCategorie(categorie_id);
+  modelMap.addAttribute("categorie", categorie);
+  return "modifierCategorie";
+  }
 
   // @RequestMapping("/updateCategorie")
   // public String updateProduit(@ModelAttribute("categorie") Categorie

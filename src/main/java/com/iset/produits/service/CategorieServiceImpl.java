@@ -41,10 +41,10 @@ public class CategorieServiceImpl implements CategorieService {
     categorieRepository.deleteById(id);
   }
 
-  // @Override
-  // public Categorie getCategorie(Long id) {
-  //   return categorieRepository.findById(id).get();
-  // }
+  @Override
+  public Categorie getCategorie(Long id) {
+    return categorieRepository.findById(id).get();
+  }
 
   @Override
   public Page<Categorie> getAllCategoriesParPage(int page, int size) {

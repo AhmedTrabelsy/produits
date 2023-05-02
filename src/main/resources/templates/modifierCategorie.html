@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout}">
+
+<head>
+  <meta charset="windows-1256" />
+  <title>Modifier Categorie</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="container border mt-3 px-4 py-3">
+      <h2 class="text-center m-4">Modifier Categorie N° <span th:text="${categorie.idCat}"></span></h2>
+      <div th:text="${msg}" th:if="${msg}" class="alert alert-success my-3" role="alert"></div>
+      <form action="updateProduit" method="post">
+        <div class="mb-3">
+          <!-- <label for="id_input" class="form-label">Id</label> -->
+          <input name="idCat" type="text" class="form-control" id="id_input" th:value="${categorie.idCat}" hidden>
+        </div>
+        <div class="mb-3">
+          <label for="name_input" class="form-label">Nom</label>
+          <input name="nomCat" type="text" class="form-control" id="name_input" th:value="${categorie.nomCat}">
+        </div>
+
+        <div class="mb-3">
+          <label for="description_input" class="form-label">Description</label>
+          <textarea th:text="${categorie.descriptionCat}" name="descriptionCat" id="description_input"
+            class="form-control" cols="20" rows="5" placeholder="Description" required></textarea>
+          <span th:errors="${categorie.descriptionCat}" class="text-danger"></span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Modifier <i class="bi bi-check-circle"></i></button>
+          <a href="ListeProduits" class="btn btn-success"><i class="bi bi-list-ul"></i> Liste Produits</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

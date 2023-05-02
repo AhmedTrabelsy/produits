@@ -18,7 +18,7 @@ public interface CategorieService {
 
   void deleteCategorieById(Long id);
 
-  // Categorie getCategorie(Long id);
+  Categorie getCategorie(Long id);
 
   Page<Categorie> getAllCategoriesParPage(int page, int size);
 
