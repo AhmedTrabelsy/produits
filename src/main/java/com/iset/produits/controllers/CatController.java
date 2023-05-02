@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,24 +19,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.iset.produits.entities.Produit;
 import com.iset.produits.service.ProduitService;
 
+import jakarta.validation.Valid;
+
 @Controller
 public class CatController {
   @Autowired
   ProduitService produitService;
 
   @GetMapping("/showCreate")
-  public String showCreate() {
+  public String showCreate(ModelMap modelMap) {
+    modelMap.addAttribute("produit", new Produit());
     return "createProduit";
   }
 
   @PostMapping("/saveProduit")
-  public String saveProduit(@ModelAttribute("produit") Produit produit, @RequestParam("date") String date,
-      ModelMap modelMap) throws ParseException {
-    // conversion de la date
-    SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-    Date dateCreation = dateformat.parse(String.valueOf(date));
-    produit.setDateCreation(dateCreation);
+  public String saveProduit(@Valid Produit produit, BindingResult bindingResult, ModelMap modelMap)
+      throws ParseException {
 
+    if (bindingResult.hasErrors()) {
+      return "createProduit";
+    }
+    // conversion de la date
+    // SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+    // Date dateCreation = dateformat.parse(String.valueOf(produit.getDateCreation()));
+    // produit.setDateCreation(dateCreation);
+    System.out.println(produit + "  herere");
     Produit saveProduit = produitService.saveProduit(produit);
     String msg = "Produit enregistré avec Id " + saveProduit.getIdProduit();
     modelMap.addAttribute("msg", msg);
