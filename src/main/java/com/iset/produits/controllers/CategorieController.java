@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,41 +91,39 @@ public class CategorieController {
 
   @RequestMapping("/modifierCategorie")
   public String modifierCategories(@RequestParam("id") Long categorie_id,
-  ModelMap modelMap) {
-  Categorie categorie = categorieService.getCategorie(categorie_id);
-  modelMap.addAttribute("categorie", categorie);
-  return "modifierCategorie";
+      ModelMap modelMap) {
+    Categorie categorie = categorieService.getCategorie(categorie_id);
+    modelMap.addAttribute("categorie", categorie);
+    return "modifierCategorie";
   }
 
-  // @RequestMapping("/updateCategorie")
-  // public String updateProduit(@ModelAttribute("categorie") Categorie
-  // new_categorie,
-  // @RequestParam(name = "page", defaultValue = "0") int page,
-  // @RequestParam(name = "size", defaultValue = "7") int size,
-  // ModelMap modelMap) throws ParseException {
-  // Categorie old_categorie =
-  // categorieService.getCategorie(new_categorie.getIdCat());
+  @RequestMapping("/updateCategorie")
+  public String updateProduit(@ModelAttribute("categorie") Categorie new_categorie,
+      @RequestParam(name = "page", defaultValue = "0") int page,
+      @RequestParam(name = "size", defaultValue = "7") int size,
+      ModelMap modelMap) throws ParseException {
+    Categorie old_categorie = categorieService.getCategorie(new_categorie.getIdCat());
 
-  // if (old_categorie.getNomCat() != new_categorie.getNomCat() &&
-  // new_categorie.getNomCat().length() > 0) {
-  // old_categorie.setNomCat(new_categorie.getNomCat());
-  // }
-  // if (old_categorie.getDescriptionCat() != new_categorie.getDescriptionCat()
-  // && new_categorie.getDescriptionCat().length() > 0D) {
-  // old_categorie.setDescriptionCat(new_categorie.getDescriptionCat());
-  // }
-  // categorieService.updateCategorie(old_categorie);
+    if (old_categorie.getNomCat() != new_categorie.getNomCat() &&
+        new_categorie.getNomCat().length() > 0) {
+      old_categorie.setNomCat(new_categorie.getNomCat());
+    }
+    if (old_categorie.getDescriptionCat() != new_categorie.getDescriptionCat()
+        && new_categorie.getDescriptionCat().length() > 0D) {
+      old_categorie.setDescriptionCat(new_categorie.getDescriptionCat());
+    }
+    categorieService.updateCategorie(old_categorie);
 
-  // Page<Categorie> categories = categorieService.getAllCategoriesParPage(page,
-  // size);
-  // modelMap.addAttribute("categories", categories);
-  // modelMap.addAttribute("pages", new int[categories.getTotalPages()]);
-  // modelMap.addAttribute("currentPage", page);
-  // modelMap.addAttribute("size", size);
+    Page<Categorie> categories = categorieService.getAllCategoriesParPage(page,
+        size);
+    modelMap.addAttribute("categories", categories);
+    modelMap.addAttribute("pages", new int[categories.getTotalPages()]);
+    modelMap.addAttribute("currentPage", page);
+    modelMap.addAttribute("size", size);
 
-  // String msg = "Categorie modifié";
-  // modelMap.addAttribute("msg", msg);
-  // return "listeCategories";
-  // }
+    String msg = "Categorie modifié";
+    modelMap.addAttribute("msg", msg);
+    return "listeCategories";
+  }
 
 }

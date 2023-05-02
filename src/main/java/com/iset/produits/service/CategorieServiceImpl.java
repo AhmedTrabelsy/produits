@@ -26,10 +26,10 @@ public class CategorieServiceImpl implements CategorieService {
     return categorieRepository.save(p);
   }
 
-  // @Override
-  // public Categorie updateCategorie(Categorie p) {
-  //   return categorieRepository.save(p);
-  // }
+  @Override
+  public Categorie updateCategorie(Categorie p) {
+    return categorieRepository.save(p);
+  }
 
   // @Override
   // public void deleteCategorie(Categorie p) {

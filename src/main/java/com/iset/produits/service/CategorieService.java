@@ -12,7 +12,7 @@ public interface CategorieService {
 
   Categorie saveCategorie(Categorie p);
 
-  // Categorie updateCategorie(Categorie p);
+  Categorie updateCategorie(Categorie p);
 
   // void deleteCategorie(Categorie p);
 

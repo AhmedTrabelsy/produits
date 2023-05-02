@@ -12,7 +12,7 @@
     <div class="container border mt-3 px-4 py-3">
       <h2 class="text-center m-4">Modifier Categorie N° <span th:text="${categorie.idCat}"></span></h2>
       <div th:text="${msg}" th:if="${msg}" class="alert alert-success my-3" role="alert"></div>
-      <form action="updateProduit" method="post">
+      <form action="updateCategorie" method="post">
         <div class="mb-3">
           <!-- <label for="id_input" class="form-label">Id</label> -->
           <input name="idCat" type="text" class="form-control" id="id_input" th:value="${categorie.idCat}" hidden>
@@ -30,7 +30,7 @@
         </div>
         <div class="d-flex justify-content-between">
           <button type="submit" class="btn btn-primary">Modifier <i class="bi bi-check-circle"></i></button>
-          <a href="ListeProduits" class="btn btn-success"><i class="bi bi-list-ul"></i> Liste Produits</a>
+          <a href="listeCategories" class="btn btn-success"><i class="bi bi-list-ul"></i> Liste Categories</a>
         </div>
       </form>
     </div>
