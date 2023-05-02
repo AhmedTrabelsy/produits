@@ -23,11 +23,20 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li> -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="#" id="produits" data-bs-toggle="dropdown"
               aria-expanded="false">Produits</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown07">
-              <li><a class="dropdown-item" th:href="@{showCreate}">Ajouter</a></li>
+            <ul class="dropdown-menu" aria-labelledby="produits">
+              <li><a class="dropdown-item" th:href="@{showCreateProduit}">Ajouter</a></li>
               <li><a class="dropdown-item" th:href="@{ListeProduits}">Lister</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="categroies" data-bs-toggle="dropdown"
+              aria-expanded="false">Categories</a>
+            <ul class="dropdown-menu" aria-labelledby="categroies">
+              <li><a class="dropdown-item" th:href="@{showCreateProduit}">Ajouter</a></li>
+              <li><a class="dropdown-item" th:href="@{ListeProduits}">Lister</a></li>
+              <!-- here -->
             </ul>
           </li>
         </ul>

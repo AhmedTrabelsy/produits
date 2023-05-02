@@ -26,8 +26,8 @@ public class CatController {
   @Autowired
   ProduitService produitService;
 
-  @GetMapping("/showCreate")
-  public String showCreate(ModelMap modelMap) {
+  @GetMapping("/showCreateProduit")
+  public String showCreateProduit(ModelMap modelMap) {
     modelMap.addAttribute("produit", new Produit());
     return "createProduit";
   }
@@ -43,7 +43,6 @@ public class CatController {
     // SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
     // Date dateCreation = dateformat.parse(String.valueOf(produit.getDateCreation()));
     // produit.setDateCreation(dateCreation);
-    System.out.println(produit + "  herere");
     Produit saveProduit = produitService.saveProduit(produit);
     String msg = "Produit enregistré avec Id " + saveProduit.getIdProduit();
     modelMap.addAttribute("msg", msg);
