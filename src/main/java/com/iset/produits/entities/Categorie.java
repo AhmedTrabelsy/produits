@@ -7,13 +7,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Categorie {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long idCat;
+  @NotNull
+  @Size(min = 4, max = 15)
   private String nomCat;
+  @NotNull
+  @Size(min = 7, max = 40)
   private String descriptionCat;
   @OneToMany(mappedBy = "categorie")
   private List<Produit> produits;
