@@ -19,21 +19,29 @@
           <form action="saveProduit" method="post">
             <div class="mb-3">
               <label for="name_input" class="form-label">Nom</label>
-              <input name="nomProduit" type="text" class="form-control" id="name_input" placeholder="Nom Produit" th:value="${produit.nomProduit}"
-                required>
+              <input name="nomProduit" type="text" class="form-control" id="name_input" placeholder="Nom Produit"
+                th:value="${produit.nomProduit}" required>
               <span th:errors="${produit.nomProduit}" class="text-danger"></span>
             </div>
             <div class="mb-3">
               <label for="price_input" class="form-label">Prix</label>
-              <input name="prixProduit" type="number" class="form-control" id="price_input" placeholder="Prix Produit" min="0" step="any"
-                th:value="${produit.prixProduit}" required>
+              <input name="prixProduit" type="number" class="form-control" id="price_input" placeholder="Prix Produit"
+                min="0" step="any" th:value="${produit.prixProduit}" required>
               <span th:errors="${produit.prixProduit}" class="text-danger"></span>
             </div>
             <div class="mb-3">
               <label for="date_input" class="form-label">Date</label>
-              <input name="dateCreation" type="date" class="form-control" id="date_input" th:value="${produit.dateCreation}"
-                required>
+              <input name="dateCreation" type="date" class="form-control" id="date_input"
+                th:value="${produit.dateCreation}" required>
               <span th:errors="${produit.dateCreation}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+              <label for="categorie_input" class="form-label">Categorie</label>
+              <select name="categorieProduit" class="form-control" id="categorie_input" required>
+                <option selected>Choisir une categorie</option>
+                <option th:value="${categorie.idCat}" th:each="categorie: ${categories}" th:text="${categorie.nomCat}"></option>
+              </select>
+              <!-- <span th:errors="${produit.categorie}" class="text-danger"></span> -->
             </div>
             <div class="d-flex justify-content-between">
               <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ajouter</button>

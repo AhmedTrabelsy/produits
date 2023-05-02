@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.iset.produits.entities.Categorie;
 import com.iset.produits.entities.Produit;
+import com.iset.produits.service.CategorieService;
 import com.iset.produits.service.ProduitService;
 
 import jakarta.validation.Valid;
@@ -25,26 +27,40 @@ import jakarta.validation.Valid;
 public class CatController {
   @Autowired
   ProduitService produitService;
+  @Autowired
+  CategorieService categorieService;
 
   @GetMapping("/showCreateProduit")
   public String showCreateProduit(ModelMap modelMap) {
+    List<Categorie> categories = categorieService.getAllCategories();
+
+    modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("produit", new Produit());
     return "createProduit";
   }
 
   @PostMapping("/saveProduit")
-  public String saveProduit(@Valid Produit produit, BindingResult bindingResult, ModelMap modelMap)
+  public String saveProduit(@Valid Produit produit, @RequestParam("categorieProduit") Long categorieProduit,
+      BindingResult bindingResult, ModelMap modelMap)
       throws ParseException {
 
     if (bindingResult.hasErrors()) {
       return "createProduit";
     }
+
+    List<Categorie> categories = categorieService.getAllCategories();
+    Categorie categorie = categorieService.getCategorie(categorieProduit);
+    produit.setCategorie(categorie);
+
     // conversion de la date
     // SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-    // Date dateCreation = dateformat.parse(String.valueOf(produit.getDateCreation()));
+    // Date dateCreation =
+    // dateformat.parse(String.valueOf(produit.getDateCreation()));
     // produit.setDateCreation(dateCreation);
     Produit saveProduit = produitService.saveProduit(produit);
     String msg = "Produit enregistré avec Id " + saveProduit.getIdProduit();
+
+    modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("msg", msg);
     return "createProduit";
   }
