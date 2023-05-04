@@ -124,13 +124,17 @@ public class CatController {
 
   @RequestMapping("/modifierProduit")
   public String modifierProduit(@RequestParam("id") Long produit_id, ModelMap modelMap) {
+    List<Categorie> categories = categorieService.getAllCategories();
     Produit prod = produitService.getProduit(produit_id);
+
+    modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("produit", prod);
     return "modifierProduit";
   }
 
   @RequestMapping("/updateProduit")
   public String updateProduit(@ModelAttribute("produit") Produit new_produit, @RequestParam("date") String date,
+      @RequestParam("categorieProduit") Long categorieProduit,
       @RequestParam(name = "page", defaultValue = "0") int page,
       @RequestParam(name = "size", defaultValue = "7") int size,
       ModelMap modelMap) throws ParseException {
@@ -147,6 +151,12 @@ public class CatController {
     }
     if (old_produit.getPrixProduit() != new_produit.getPrixProduit() && new_produit.getPrixProduit() > 0D) {
       old_produit.setPrixProduit(new_produit.getPrixProduit());
+    }
+    if (old_produit.getCategorie().getIdCat() != categorieProduit && categorieProduit > 0D) {
+      System.out.println("hello world !");
+      Categorie categorie = categorieService.getCategorie(categorieProduit);
+      System.out.println("qsdfqsdfqsdfq " + categorie.getNomCat());
+      old_produit.setCategorie(categorie);
     }
     produitService.updateProduit(old_produit);
 
