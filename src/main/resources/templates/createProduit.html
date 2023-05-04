@@ -38,7 +38,7 @@
             <div class="mb-3">
               <label for="categorie_input" class="form-label">Categorie</label>
               <select name="categorieProduit" class="form-control" id="categorie_input" required>
-                <option selected>Choisir une categorie</option>
+                <option selected disabled>Choisir une categorie</option>
                 <option th:value="${categorie.idCat}" th:each="categorie: ${categories}" th:text="${categorie.nomCat}"></option>
               </select>
               <!-- <span th:errors="${produit.categorie}" class="text-danger"></span> -->
