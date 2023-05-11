@@ -36,7 +36,7 @@ public class CatController {
 
     modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("produit", new Produit());
-    return "createProduit";
+    return "modifierProduit";
   }
 
   @PostMapping("/saveProduit")
@@ -45,7 +45,7 @@ public class CatController {
       throws ParseException {
 
     if (bindingResult.hasErrors()) {
-      return "createProduit";
+      return "modifierProduit";
     }
 
     List<Categorie> categories = categorieService.getAllCategories();
@@ -62,7 +62,7 @@ public class CatController {
 
     modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("msg", msg);
-    return "createProduit";
+    return "modifierProduit";
   }
 
   @GetMapping("/ListeProduits")

@@ -4,22 +4,29 @@
 
 <head>
   <meta charset="windows-1256" />
-  <title>Modifier Categorie</title>
+  <title>Categorie</title>
 </head>
-
+  
 <body>
   <div layout:fragment="content">
     <div class="container border mt-3 px-4 py-3">
-      <h2 class="text-center m-4">Modifier Categorie N° <span th:text="${categorie.idCat}"></span></h2>
+      <h2 th:if="${categorie.idCat}" class="text-center m-4">Modifier Categorie N° <span
+          th:text="${categorie.idCat}"></span></h2>
+      <div th:unless="${categorie.idCat}" class="card-header">
+        <h1 class="text-center">Ajouter Categorie</h1>
+      </div>
       <div th:text="${msg}" th:if="${msg}" class="alert alert-success my-3" role="alert"></div>
-      <form action="updateCategorie" method="post">
+      <form th:action="${categorie.idCat} ? 'updateCategorie' : 'saveCategorie'" method="post">
         <div class="mb-3">
           <!-- <label for="id_input" class="form-label">Id</label> -->
-          <input name="idCat" type="text" class="form-control" id="id_input" th:value="${categorie.idCat}" hidden>
+          <input th:if="${categorie.idCat}" name="idCat" type="text" class="form-control" id="id_input"
+            th:value="${categorie.idCat}" hidden>
         </div>
         <div class="mb-3">
           <label for="name_input" class="form-label">Nom</label>
-          <input name="nomCat" type="text" class="form-control" id="name_input" th:value="${categorie.nomCat}">
+          <input name="nomCat" type="text" class="form-control" placeholder="Nom Categorie" id="name_input"
+            th:value="${categorie.nomCat}" required>
+          <span th:errors="${categorie.nomCat}" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
@@ -29,7 +36,10 @@
           <span th:errors="${categorie.descriptionCat}" class="text-danger"></span>
         </div>
         <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-primary">Modifier <i class="bi bi-check-circle"></i></button>
+          <button th:if="${categorie.idCat}" type="submit" class="btn btn-primary">Modifier <i
+              class="bi bi-check-circle"></i></button>
+          <button th:unless="${categorie.idCat}" type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i>
+            Ajouter</button>
           <a href="ListeCategories" class="btn btn-success"><i class="bi bi-list-ul"></i> Liste Categories</a>
         </div>
       </form>

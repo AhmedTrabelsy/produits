@@ -38,7 +38,7 @@ public class CategorieController {
   @GetMapping("/showCreateCategorie")
   public String showCreateCategorie(ModelMap modelMap) {
     modelMap.addAttribute("categorie", new Categorie());
-    return "createCategorie";
+    return "modifierCategorie";
   }
 
   @PostMapping("/saveCategorie")
@@ -46,12 +46,12 @@ public class CategorieController {
       throws ParseException {
 
     if (bindingResult.hasErrors()) {
-      return "createCategorie";
+      return "modifierCategorie";
     }
     Categorie saveCategorie = categorieService.saveCategorie(categorie);
     String msg = "Categorie enregistré avec Id " + saveCategorie.getIdCat();
     modelMap.addAttribute("msg", msg);
-    return "createCategorie";
+    return "modifierCategorie";
   }
 
   @GetMapping("/ListeCategoriesByName")
