@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.2.3/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css" />
 
@@ -34,10 +35,20 @@
             <a class="nav-link dropdown-toggle" href="#" id="categroies" data-bs-toggle="dropdown"
               aria-expanded="false">Categories</a>
             <ul class="dropdown-menu" aria-labelledby="categroies">
-              <li><a class="dropdown-item" th:href="@{showCreateCategorie}">Ajouter</a></li>
+              <li><a sec:authorize="hasRole('ADMIN')" class="dropdown-item" th:href="@{showCreateCategorie}">Ajouter</a></li>
               <li><a class="dropdown-item" th:href="@{ListeCategories}">Lister</a></li>
               <!-- here -->
             </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              <span sec:authentication="name"></span>
+            </a>
+            <div class="dropdown-menu">
+              <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{login}">login</a>
+              <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">logout</a>
+              <a class="dropdown-item" href="@{login}">Profile</a>
+            </div>
           </li>
         </ul>
       </div>

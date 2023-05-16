@@ -37,16 +37,16 @@
               <th>Prix</th>
               <th>Date Création</th>
               <th>Categorie</th>
-              <th>Actions</th>
+              <th sec:authorize="hasRole('ADMIN')">Actions</th>
             </tr>
             <tr th:each="produit: ${produits}">
               <td th:text="${produit.idProduit}"></td>
               <td th:text="${produit.nomProduit}"></td>
               <td th:text="${produit.prixProduit}"></td>
               <td th:text="${produit.dateCreation}"></td>
-              <td th:text="${produit.categorie.nomCat}"></td>
+              <td th:text="${produit.getCategorie().getNomCat()}"></td>
 
-              <td>
+              <td sec:authorize="hasRole('ADMIN')">
                 <a th:href="@{modifierProduit(id=${produit.idProduit})}" class="btn btn-success btn-sm" type="button"
                   title="Edit">
                   <i class="bi bi-pencil-square"></i>
