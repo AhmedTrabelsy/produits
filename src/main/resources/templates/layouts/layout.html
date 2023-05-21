@@ -35,29 +35,28 @@
             <a class="nav-link dropdown-toggle" href="#" id="categroies" data-bs-toggle="dropdown"
               aria-expanded="false">Categories</a>
             <ul class="dropdown-menu" aria-labelledby="categroies">
-              <li><a sec:authorize="hasRole('ADMIN')" class="dropdown-item" th:href="@{showCreateCategorie}">Ajouter</a></li>
+              <li><a sec:authorize="hasRole('ADMIN')" class="dropdown-item" th:href="@{showCreateCategorie}">Ajouter</a>
+              </li>
               <li><a class="dropdown-item" th:href="@{ListeCategories}">Lister</a></li>
-              <!-- here -->
             </ul>
           </li>
+
+
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              <span sec:authentication="name"></span>
-            </a>
-            <div class="dropdown-menu">
-              <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{login}">login</a>
-              <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">logout</a>
-              <a class="dropdown-item" href="@{login}">Profile</a>
-            </div>
+            <a class="nav-link dropdown-toggle" href="#" id="profile" data-bs-toggle="dropdown"
+              aria-expanded="false"><span sec:authentication="username"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="categroies">
+              <li><a class="dropdown-item" href="@{login}">Profile</a></li>
+              <li><a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">logout</a></li>
+            </ul>
           </li>
+
         </ul>
       </div>
     </div>
   </nav>
-
   <section layout:fragment="content"></section>
   <script type="text/javascript" src="webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>

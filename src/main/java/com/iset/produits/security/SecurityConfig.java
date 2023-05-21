@@ -1,47 +1,60 @@
 package com.iset.produits.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+
+import com.iset.produits.service.UserService;
 
 @Configuration
-// @EnableWebSecurity
+@EnableWebSecurity
+// @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true,
+// jsr250Enabled = true)
 public class SecurityConfig {
-  @Bean
-  public UserDetailsService users() {
-    PasswordEncoder passwordEncoder = passwordEncoder();
-    UserDetails user = User.builder().username("Najla").password(passwordEncoder.encode("123")).roles("AGENT").build();
-    UserDetails admin = User.builder().username("admin").password(passwordEncoder.encode("123")).roles("ADMIN").build();
-    UserDetails user1 = User.builder().username("user1").password(passwordEncoder.encode("123")).roles("USER").build();
-
-    return new InMemoryUserDetailsManager(user, admin, user1);
-  }
+  public static final String AUTHORITIES_CLAIM_NAME = "roles";
+  @Autowired
+  UserService userDetailsService;
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests()
-        .requestMatchers("/showCreateProduit", "/saveProduit").hasAnyRole("ADMIN", "AGENT");
-    http.authorizeHttpRequests()
-        .requestMatchers("/showCreateCategorie", "/saveCategorie").hasAnyRole("ADMIN", "AGENT");
-    http.authorizeHttpRequests()
-        .requestMatchers("/ListeProduits", "ListeCategories").hasAnyRole("ADMIN", "AGENT", "USER");
-    http.authorizeHttpRequests().requestMatchers("/supprimerProduit", "/modifierProduit",
-        "/updateProduit").hasAnyRole("ADMIN");
-    http.authorizeHttpRequests().requestMatchers("/supprimerCategorie", "/modifierCategorie",
-        "/updateCategorie").hasAnyRole("ADMIN");
 
-    http.authorizeHttpRequests().anyRequest().authenticated();
+    http.csrf().disable()
+        .authenticationProvider(getProvider())
+        .formLogin()
+        .loginPage("/login")
+        .loginProcessingUrl("/login")
+        .defaultSuccessUrl("/ListeProduits", true)
+        .failureHandler(new SimpleUrlAuthenticationFailureHandler())
+        .and()
+        .logout()
+        .logoutUrl("/logout")
+        .invalidateHttpSession(true)
+        .and()
+        .authorizeHttpRequests()
+        .requestMatchers("/webjars/**").permitAll()
+        .requestMatchers("/login").permitAll()
+        .requestMatchers("/logout").permitAll()
+        .requestMatchers("/ajouterCompte").permitAll()
+        .requestMatchers("/saveUser").permitAll()
+        .anyRequest().authenticated();
+
     http.exceptionHandling().accessDeniedPage("/accessDenied");
-    http.formLogin();
-    http.httpBasic();
     return http.build();
+  }
+
+  @Bean
+  public AuthenticationProvider getProvider() {
+    AppAuthProvider provider = new AppAuthProvider();
+    System.out.println("here is the provider calling");
+    provider.setUserDetailsService(userDetailsService);
+    return provider;
   }
 
   @Bean
@@ -49,18 +62,3 @@ public class SecurityConfig {
     return new BCryptPasswordEncoder();
   }
 }
-
-// // http.authorizeRequests().anyRequest().authenticated();
-
-// http.authorizeRequests().antMatchers("/showCreateProduit",
-// "/saveProduit").hasAnyRole("ADMIN", "AGENT");
-
-// http.authorizeRequests().antMatchers("/ListeProduits").hasAnyRole("ADMIN",
-// "AGENT", "USER");
-
-// http.authorizeRequests().antMatchers("/supprimerProduit", "/modifierProduit",
-// "/updateProduit").hasAnyRole("ADMIN");
-
-// http.authorizeRequests().anyRequest().authenticated();
-// http.exceptionHandling().accessDeniedPage("/accessDenied");
-// http.formLogin();
